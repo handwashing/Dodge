@@ -26,6 +26,16 @@ public class PlayerController : MonoBehaviour
         //'A'(왼) 음의방향~-1.0f /'D'(오) 양~+1.0f
         float zinput = Input.GetAxis("Vertical");
         //'W'(위) 양의방향~1.0f / 'S'(아래)음 ~-1.0f
+
+        //실제 이동 속도를 입렵값과
+        //이동 속력을 사용해 결정
+        float xSpeed = xinput * speed;
+        float zSpeed = zinput * speed;
+
+        // vector3 속도를 (xSpeed, 0f, zSpeed) 생성
+        Vector3 newVelocity = new Vector3(xSpeed, 0f, zSpeed);
+        // 리지드바디의 속도에 newVelocity 할당
+        playerRigidbody.velocity = newVelocity;
     }
         
     
@@ -50,7 +60,7 @@ public class PlayerController : MonoBehaviour
             playerRigidbody.AddForce(0f, 0f, -speed);
         }
     }
-void Die()
+    public void Die()
     {
         my.SetActive(false);
         
